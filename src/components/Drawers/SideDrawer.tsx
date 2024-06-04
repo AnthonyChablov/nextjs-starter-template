@@ -4,8 +4,8 @@ import Drawer from "@mui/material/Drawer";
 import { ReactNode } from "react";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import Icons from "../Common/Icons";
-
 import ClickeableButton from "../Buttons/ClickeableButton";
+
 interface SideDrawerProps {
   children?: ReactNode;
   onOpen: boolean;
@@ -13,7 +13,10 @@ interface SideDrawerProps {
 }
 
 const SideDrawer = ({ children, onOpen, toggleDrawer }: SideDrawerProps) => {
+  /* State */
   const [toggleSideBar, setToggleSideBar] = useState(false);
+
+  /* Hooks */
   const windowWidth = useWindowWidth();
   const drawerWidth = windowWidth <= 500 ? "100%" : "70%";
 
