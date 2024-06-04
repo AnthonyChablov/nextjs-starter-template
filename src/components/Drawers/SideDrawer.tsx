@@ -8,15 +8,13 @@ import ClickeableButton from "../Buttons/ClickeableButton";
 
 interface SideDrawerProps {
   children?: ReactNode;
-  onOpen: boolean;
-  toggleDrawer: () => void;
+  onOpen?: boolean;
+  toggleDrawer?: () => void;
 }
 
 const SideDrawer = ({ children, onOpen, toggleDrawer }: SideDrawerProps) => {
-  /* State */
-  const [toggleSideBar, setToggleSideBar] = useState(false);
+  const [toggleSideDrawer, setToggleSideDrawer] = useState(false);
 
-  /* Hooks */
   const windowWidth = useWindowWidth();
   const drawerWidth = windowWidth <= 500 ? "100%" : "70%";
 
@@ -27,7 +25,7 @@ const SideDrawer = ({ children, onOpen, toggleDrawer }: SideDrawerProps) => {
         isIconOnly
         variant="ghost"
         className="outline-none text-right w-fit border-0 p-2 md:hidden"
-        onClick={() => setToggleSideBar(!toggleSideBar)}
+        onClick={() => setToggleSideDrawer(!toggleSideDrawer)}
         aria-label="Open"
       >
         <Icons size={40} color="black" type="menu" />
@@ -35,8 +33,8 @@ const SideDrawer = ({ children, onOpen, toggleDrawer }: SideDrawerProps) => {
       <Drawer
         anchor="right"
         role="presentation"
-        open={onOpen}
-        onClose={toggleDrawer}
+        open={toggleSideDrawer}
+        onClose={setToggleSideDrawer}
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -51,13 +49,13 @@ const SideDrawer = ({ children, onOpen, toggleDrawer }: SideDrawerProps) => {
           <ClickeableButton
             isIconOnly
             onClick={() => {
-              toggleDrawer();
+              setToggleSideDrawer(!toggleSideDrawer);
             }}
             variant="ghost"
             className=" outline-none text-right w-fit border-0 p-2"
             aria-label="Close"
           >
-            <Icons type="close" size={40} color="#a0968c" />
+            <Icons type="close" size={40} color="black" />
           </ClickeableButton>
         </div>
         <div className="w-9/12 mx-auto">{children}</div>
