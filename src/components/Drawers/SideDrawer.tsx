@@ -1,11 +1,11 @@
 "use client";
-import React from "react";
-import { Button } from "@nextui-org/react";
+import React, { useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import { ReactNode } from "react";
 import useWindowWidth from "@/hooks/useWindowWidth";
 import Icons from "../Common/Icons";
 
+import ClickeableButton from "../Buttons/ClickeableButton";
 interface SideDrawerProps {
   children?: ReactNode;
   onOpen: boolean;
@@ -13,12 +13,22 @@ interface SideDrawerProps {
 }
 
 const SideDrawer = ({ children, onOpen, toggleDrawer }: SideDrawerProps) => {
-  /* Hooks */
+  const [toggleSideBar, setToggleSideBar] = useState(false);
   const windowWidth = useWindowWidth();
   const drawerWidth = windowWidth <= 500 ? "100%" : "70%";
 
   return (
     <>
+      {/* Button That Triggers Drawer */}
+      <ClickeableButton
+        isIconOnly
+        variant="ghost"
+        className="outline-none text-right w-fit border-0 p-2 md:hidden"
+        onClick={() => setToggleSideBar(!toggleSideBar)}
+        aria-label="Open"
+      >
+        <Icons size={40} color="black" type="menu" />
+      </ClickeableButton>
       <Drawer
         anchor="right"
         role="presentation"
@@ -35,7 +45,7 @@ const SideDrawer = ({ children, onOpen, toggleDrawer }: SideDrawerProps) => {
         }}
       >
         <div className=" w-full flex items-end justify-end px-4 py-7 ">
-          <Button
+          <ClickeableButton
             isIconOnly
             onClick={() => {
               toggleDrawer();
@@ -45,7 +55,7 @@ const SideDrawer = ({ children, onOpen, toggleDrawer }: SideDrawerProps) => {
             aria-label="Close"
           >
             <Icons type="close" size={40} color="#a0968c" />
-          </Button>
+          </ClickeableButton>
         </div>
         <div className="w-9/12 mx-auto">{children}</div>
       </Drawer>
