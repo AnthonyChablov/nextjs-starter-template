@@ -10,7 +10,7 @@ interface HeaderTextProps {
 
 const HeaderText = ({
   mode = "h1",
-  text,
+  text = "",
   children,
   className,
 }: HeaderTextProps) => {
@@ -34,8 +34,8 @@ const HeaderText = ({
       modeClass = "text-base";
       HeadingTag = "h4";
       break;
-    default:
-      modeClass = "text-2xl"; // Default to h1 size if mode is not recognized
+    default: // Default to h1 size if mode is not recognized
+      modeClass = "text-3xl";
       HeadingTag = "h1";
   }
 
